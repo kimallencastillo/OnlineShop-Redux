@@ -1,16 +1,10 @@
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useGetAllProductsQuery } from "../features/productsApi";
-import { addToCart } from "../features/cartSlice";
 
 const Home = () => {
   const { item, status } = useSelector((state) => state.products);
   const { data, error, isLoading } = useGetAllProductsQuery();
-  const dispatch = useDispatch();
-  const handleAddToCart = (product) => {
-    dispatch(addToCart(product));
-  };
-
   const [selectedCategory, setSelectedCategory] = useState("");
 
   if (isLoading) {
@@ -28,7 +22,7 @@ const Home = () => {
   return (
     <div className="home-container">
       <h2>New Arrivals</h2>
-      <div className="category-div">
+      <div>
         <label htmlFor="category-select">Select a category:</label>
         <select
           id="category-select"
@@ -53,9 +47,7 @@ const Home = () => {
             <div className="details">
               <span>{product.description}</span>
             </div>
-            <button onClick={() => handleAddToCart(product)}>
-              Add To Cart
-            </button>
+            <button>Add To Cart</button>
           </div>
         ))}
       </div>
