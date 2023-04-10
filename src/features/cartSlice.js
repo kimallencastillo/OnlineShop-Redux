@@ -11,6 +11,7 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    // Add Item to Cart
     addToCart(state, action) {
       // using findIndex() to check if we already have the item that we are trying to add in cart Items
       const itemIndex = state.cartItems.findIndex(
@@ -80,9 +81,43 @@ const cartSlice = createSlice({
       // update the localStorage
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
+    // Empty the Cart Array
+    clearCart(state, action) {
+      state.cartItems = [];
+
+      // Add a Toast Message
+      toast.error(`Cart Cleared`, {
+        position: "top-right",
+      });
+      // update the localStorage
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+    },
+    // get the total
+    getTotals(state, action) {
+      // using reduce array method
+      let { total, quantity } = state.cartItems.reduce(
+        (cartTotal, cartItem) => {
+          const { price, cartQuantity } = cartItem;
+          const itemTotal = price * cartQuantity;
+
+          cartTotal.total += itemTotal;
+          cartTotal.quantity += cartQuantity;
+
+          return cartTotal;
+        },
+        {
+          total: 0,
+          quantity: 0,
+        }
+      );
+      total = parseFloat(total.toFixed(2));
+      state.carTotalQuantity = quantity;
+      state.cartTotalAmount = total;
+    },
   },
 });
 
-export const { addToCart, removeFromCart, decreaseCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, decreaseCart, clearCart, getTotals } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;

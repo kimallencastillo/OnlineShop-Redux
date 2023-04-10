@@ -1,11 +1,23 @@
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { removeFromCart, decreaseCart, addToCart } from "../features/cartSlice";
+import {
+  removeFromCart,
+  decreaseCart,
+  addToCart,
+  clearCart,
+  getTotals,
+} from "../features/cartSlice";
 
 const Cart = () => {
-  //₱
+  //
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTotals());
+  }, [cart, dispatch]);
+
   const handleRemoveFromCart = (cartItem) => {
     dispatch(removeFromCart(cartItem));
   };
@@ -15,6 +27,11 @@ const Cart = () => {
   const handleIncreaseCart = (cartItem) => {
     dispatch(addToCart(cartItem));
   };
+
+  const handleClearCart = (cartItem) => {
+    dispatch(clearCart());
+  };
+
   return (
     <div className="cart-container">
       <h2>Shopping Cart</h2>
@@ -63,7 +80,7 @@ const Cart = () => {
                       </button>
                     </div>
                   </div>
-                  <div className="cart-product-price">${cartItem.price}</div>
+                  <div className="cart-product-price">₱{cartItem.price}</div>
                   <div className="cart-product-quantity">
                     <button onClick={() => handleDecreasecart(cartItem)}>
                       -
@@ -74,18 +91,20 @@ const Cart = () => {
                     </button>
                   </div>
                   <div className="cart-product-total-price">
-                    ${cartItem.price * cartItem.cartQuantity}
+                    ₱{cartItem.price * cartItem.cartQuantity}
                   </div>
                 </div>
               );
             })}
             {/* Cart Summary */}
             <div className="cart-summary">
-              <button className="clear-cart">Clear Cart</button>
+              <button className="clear-cart" onClick={() => handleClearCart()}>
+                Clear Cart
+              </button>
               <div className="cart-checkout">
                 <div className="subtotal">
                   <span>Subtotal</span>
-                  <span className="amount">${cart.cartTotalAmount}</span>
+                  <span className="amount">₱{cart.cartTotalAmount}</span>
                 </div>
                 <p>Taxes and shipping calculated at checkout</p>
                 <button>Check Out</button>
