@@ -52,9 +52,37 @@ const cartSlice = createSlice({
         position: "top-right",
       });
     },
+    // Decrease Cart Quantity
+    decreaseCart(state, action) {
+      const itemIndex = state.cartItems.findIndex(
+        (cartItem) => cartItem.id === action.payload.id
+      );
+
+      // Create a condition that when a quantity is greater than 1 decrease its quantity but when quantity is 1 then remove the product from the cart
+      if (state.cartItems[itemIndex].cartQuantity > 1) {
+        state.cartItems[itemIndex].cartQuantity -= 1;
+
+        // Add a Toast Message
+        toast.info(`Decreased ${action.payload.name} cart quantity`, {
+          position: "top-right",
+        });
+      } else if (state.cartItems[itemIndex].cartQuantity === 1) {
+        const nextCartItems = state.cartItems.filter(
+          (cartItem) => cartItem.id !== action.payload.id
+        );
+        state.cartItems = nextCartItems;
+
+        // Add a Toast Message
+        toast.error(`${action.payload.name} remove from cart`, {
+          position: "top-right",
+        });
+      }
+      // update the localStorage
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+    },
   },
 });
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, decreaseCart } = cartSlice.actions;
 
 export default cartSlice.reducer;
