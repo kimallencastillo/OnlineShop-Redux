@@ -4,7 +4,7 @@ const initialState = {
   cartItems: localStorage.getItem("cartItems")
     ? JSON.parse(localStorage.getItem("cartItems"))
     : [],
-  carTotalQuantity: 0,
+  cartTotalQuantity: 0,
   cartTotalAmount: 0,
 };
 const cartSlice = createSlice({
@@ -19,7 +19,7 @@ const cartSlice = createSlice({
       );
       // using itemIndex to determine whether to push the product to cart or increment the cart quantity
       if (itemIndex >= 0) {
-        // increment(carTotalQuantity) the particular item
+        // increment(cartTotalQuantity) the particular item
         state.cartItems[itemIndex].cartQuantity += 1;
 
         // using pop up notif when added same product
@@ -111,7 +111,7 @@ const cartSlice = createSlice({
         }
       );
       total = parseFloat(total.toFixed(2));
-      state.carTotalQuantity = quantity;
+      state.cartTotalQuantity = quantity;
       state.cartTotalAmount = total;
     },
   },
