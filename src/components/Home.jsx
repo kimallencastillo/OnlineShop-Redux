@@ -53,9 +53,6 @@ const Home = () => {
             <img src={product.image} alt={product.name} />
             <h3>{product.name}</h3>
             <h4>₱{product.price.toLocaleString()}</h4>
-            <div className="details">
-              <span>{product.description}</span>
-            </div>
             <button onClick={() => handleAddToCart(product)}>
               Add To Cart
             </button>
