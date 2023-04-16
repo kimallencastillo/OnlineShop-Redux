@@ -21,14 +21,14 @@ const productsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(productsFetch.pending, (state, action) => {
+      .addCase(productsFetch.pending, (state) => {
         // immer
         // updating the state of a mutable state
         state.status = "pending";
       })
       .addCase(productsFetch.fulfilled, (state, action) => {
         state.status = "success";
-        state.item = action.payload;
+        state.items = action.payload;
       })
       .addCase(productsFetch.rejected, (state, action) => {
         state.status = "rejected";

@@ -6,6 +6,7 @@ const cors = require("cors");
 const products = require("./routes/products");
 // import singeProduct.js router
 const singeProduct = require("./routes/singeProduct");
+
 const app = express();
 
 app.use(express.json());

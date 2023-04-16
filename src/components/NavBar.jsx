@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { getTotals } from "../features/cartSlice";
 const NavBar = () => {
   const { cartTotalQuantity } = useSelector((state) => state.cart);
 
-  console.log(cartTotalQuantity);
   return (
     <nav className="nav-bar">
       <Link to="/">
