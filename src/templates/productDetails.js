@@ -1,61 +1,32 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.min.js";
+import "@fortawesome/fontawesome-svg-core/styles.css";
 import "../App.css";
-const productDetails = (props) => {
+
+const productDetails = (details) => {
+  const {
+    id,
+    image,
+    name,
+    reviews,
+    description,
+    price,
+    size,
+    handleAddToCart,
+  } = details;
   return (
-    <div className="container">
+    <div className="container" key={id}>
       <div className="card">
         <div className="container-fliud">
           <div className="wrapper row">
             <div className="preview col-md-6">
               <div className="preview-pic tab-content">
                 <div className="tab-pane active" id="pic-1">
-                  <img src="http://placekitten.com/400/252" />
-                </div>
-                <div className="tab-pane" id="pic-2">
-                  <img src="http://placekitten.com/400/252" />
-                </div>
-                <div className="tab-pane" id="pic-3">
-                  <img src="http://placekitten.com/400/252" />
-                </div>
-                <div className="tab-pane" id="pic-4">
-                  <img src="http://placekitten.com/400/252" />
-                </div>
-                <div className="tab-pane" id="pic-5">
-                  <img src="http://placekitten.com/400/252" />
+                  <img src={image} alt={name} />
                 </div>
               </div>
-              <ul className="preview-thumbnail nav nav-tabs">
-                <li className="active">
-                  <a data-target="#pic-1" data-toggle="tab">
-                    <img src="http://placekitten.com/200/126" />
-                  </a>
-                </li>
-                <li>
-                  <a data-target="#pic-2" data-toggle="tab">
-                    <img src="http://placekitten.com/200/126" />
-                  </a>
-                </li>
-                <li>
-                  <a data-target="#pic-3" data-toggle="tab">
-                    <img src="http://placekitten.com/200/126" />
-                  </a>
-                </li>
-                <li>
-                  <a data-target="#pic-4" data-toggle="tab">
-                    <img src="http://placekitten.com/200/126" />
-                  </a>
-                </li>
-                <li>
-                  <a data-target="#pic-5" data-toggle="tab">
-                    <img src="http://placekitten.com/200/126" />
-                  </a>
-                </li>
-              </ul>
             </div>
             <div className="details col-md-6">
-              <h3 className="product-title">men's shoes fashion</h3>
+              <h3 className="product-title">{name}</h3>
               <div className="rating">
                 <div className="stars">
                   <span className="fa fa-star checked"></span>
@@ -64,39 +35,23 @@ const productDetails = (props) => {
                   <span className="fa fa-star"></span>
                   <span className="fa fa-star"></span>
                 </div>
-                <span className="review-no">41 reviews</span>
+                <span className="review-no">{reviews} reviews</span>
               </div>
-              <p className="product-description">
-                Suspendisse quos? Tempus cras iure temporibus? Eu laudantium
-                cubilia sem sem! Repudiandae et! Massa senectus enim minim
-                sociosqu delectus posuere.
-              </p>
+              <p className="product-description">{description}</p>
               <h4 className="price">
-                current price: <span>$180</span>
+                ₱ <span>{price}</span>
               </h4>
-              <p className="vote">
-                <strong>91%</strong> of buyers enjoyed this product!{" "}
-                <strong>(87 votes)</strong>
-              </p>
+
               <h5 className="sizes">
                 sizes:
                 <span className="size" data-toggle="tooltip" title="small">
-                  s
-                </span>
-                <span className="size" data-toggle="tooltip" title="medium">
-                  m
-                </span>
-                <span className="size" data-toggle="tooltip" title="large">
-                  l
-                </span>
-                <span className="size" data-toggle="tooltip" title="xtra large">
-                  xl
+                  {size}
                 </span>
               </h5>
               <h5 className="colors">
                 colors:
                 <span
-                  className="color orange not-available"
+                  className="color orange "
                   data-toggle="tooltip"
                   title="Not In store"
                 ></span>
@@ -104,10 +59,13 @@ const productDetails = (props) => {
                 <span className="color blue"></span>
               </h5>
               <div className="action">
-                <button className="add-to-cart btn btn-default" type="button">
+                <button
+                  className="add-to-cart btn-default"
+                  type="button"
+                  onClick={() => handleAddToCart(details)}
+                >
                   add to cart
                 </button>
-                <button className="like btn btn-default" type="button"></button>
               </div>
             </div>
           </div>

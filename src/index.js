@@ -1,6 +1,7 @@
 import React from "react";
 import App from "./App";
-
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
 // redux
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";

@@ -56,3 +56,26 @@ const Home = () => {
 };
 
 export default Home;
+
+/* 
+  <img
+          key={productId}
+          style={{ width: "400px" }}
+          src={item.images[0].url}
+          alt={item.name}
+        />
+        <h2>{item.id}</h2>
+        <h2>{item.name}</h2>
+        <p>{item.price}</p>
+        <p>{item.company}</p>
+        <p>{item.description}</p>
+
+              <MyCard
+        imageUrl="https://via.placeholder.com/150"
+        title="Card Title"
+        description="Some quick example text to build on the card title and make up the bulk of the card's content."
+        linkUrl="https://example.com"
+        linkText="Go somewhere"
+      />
+
+        */
