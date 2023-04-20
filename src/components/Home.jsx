@@ -1,18 +1,16 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useGetAllProductsQuery } from "../features/productsApi";
-import { addToCart } from "../features/cartSlice";
+//import { addToCart } from "../features/cartSlice";
 import { useNavigate } from "react-router-dom";
+import  { handleAddToCart } from '../utils/utils'
 import Loading from "../templates/loading";
+
 const Home = () => {
   // const { items, status } = useSelector((state) => state.products);
   const { data, error, isLoading } = useGetAllProductsQuery();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleAddToCart = (product) => {
-    dispatch(addToCart(product));
-    navigate("/cart");
-  };
 
   const [selectedCategory, setSelectedCategory] = useState("");
 
@@ -56,11 +54,12 @@ const Home = () => {
           >
             <img src={product.image} alt={product.name} />
             <h3>{product.name}</h3>
+            
             <h4>₱{product.price.toLocaleString()}</h4>
             <button
               onClick={(event) => {
                 event.stopPropagation();
-                handleAddToCart(product);
+                handleAddToCart(product, navigate, dispatch);
               }}
             >
               <svg

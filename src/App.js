@@ -12,6 +12,7 @@ import NotFound from "./components/NotFound";
 import Details from "./components/Details";
 import Loading from "./templates/loading";
 import ProductDetails from "./templates/productDetails";
+
 function App() {
   return (
     <div className="App">

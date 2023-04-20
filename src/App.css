@@ -473,7 +473,7 @@ img {
   font-weight: bold; }
 
 .checked, .price span {
-  color: #ff9f1a; }
+  color: #000; }
 
 .product-title, .rating, .product-description, .price, .vote, .sizes {
   margin-bottom: 15px; }
@@ -497,7 +497,7 @@ img {
     margin-left: 20px; }
 
 .add-to-cart, .like {
-  background-color: #ff9f1a;
+  background-color: #007bff;
   padding: 1em 1em;
   border: none;
   border-radius: 15px;
@@ -507,7 +507,7 @@ img {
   -webkit-transition: background .3s ease;
           transition: background .3s ease; }
   .add-to-cart:hover, .like:hover {
-    background-color: #b36800;
+    background-color: #0069d9;
     color: black; }
 
 .not-available {
