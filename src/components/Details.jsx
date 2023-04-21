@@ -1,34 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getProductDetails } from "../features/productDetailsSlice";
-import { addToCart } from "../features/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
-import ProductDetails from "../templates/productDetails";
+import { handleAddToCart } from "../utils/utils";
 import Loading from "../templates/loading";
 
 const Details = () => {
   const params = useParams();
   const { productId } = params;
   const { item, status, error } = useSelector((state) => state.productDetails);
-  const [cart, setCart] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleAddToCart = (product) => {
-    const itemIndex = cart.findIndex((item) => item.id === product.id);
-    if (itemIndex === -1) {
-      // If the product is not already in the cart, add it
-      dispatch(addToCart(product));
-    } else {
-      // If the product is already in the cart, increase its quantity
-      const updatedCart = [...cart];
-      updatedCart[itemIndex].quantity += 1;
-      dispatch(setCart(updatedCart));
-    }
-    navigate("/cart");
-  };
   useEffect(() => {
     dispatch(getProductDetails(productId));
   }, [dispatch, productId]);
@@ -40,24 +24,43 @@ const Details = () => {
     return <p>{error} ERROR</p>;
   }
   if (item && item.images) {
-    console.log("images : ", item.images);
     const image = item.images[0]?.url;
-
     return (
       <div>
-        {
-          <ProductDetails
-            key={productId}
-            id={productId}
-            image={image}
-            alt={item.name}
-            name={item.name}
-            price={item.price}
-            reviews={item.reviews}
-            description={item.description}
-            handleAddToCart={handleAddToCart}
-          />
-        }
+        <div className="container" key={productId}>
+          <div className="card">
+            <div className="container-fliud">
+              <div className="wrapper row">
+                <div className="preview col-md-6">
+                  <div className="preview-pic tab-content">
+                    <div className="tab-pane active" id="pic-1">
+                      <img src={image} alt={item.name} />
+                    </div>
+                  </div>
+                </div>
+                <div className="details col-md-6">
+                  <h3 className="product-title">{item.name}</h3>
+                  <div className="rating">
+                    <span className="review-no">{item.reviews} reviews</span>
+                  </div>
+                  <p className="product-description">{item.description}</p>
+                  <h4 className="price">
+                    ₱ <span>{item.price.toLocaleString()}</span>
+                  </h4>
+                  <div className="action">
+                    <button
+                      className="add-to-cart btn-default"
+                      type="button"
+                      onClick={() => handleAddToCart(item, navigate, dispatch)}
+                    >
+                      add to cart
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   } else {

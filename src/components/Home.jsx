@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useGetAllProductsQuery } from "../features/productsApi";
-//import { addToCart } from "../features/cartSlice";
 import { useNavigate } from "react-router-dom";
-import  { handleAddToCart } from '../utils/utils'
+import { handleAddToCart } from "../utils/utils";
 import Loading from "../templates/loading";
 
 const Home = () => {
@@ -54,7 +53,7 @@ const Home = () => {
           >
             <img src={product.image} alt={product.name} />
             <h3>{product.name}</h3>
-            
+
             <h4>₱{product.price.toLocaleString()}</h4>
             <button
               onClick={(event) => {

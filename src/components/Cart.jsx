@@ -10,7 +10,7 @@ import {
 } from "../features/cartSlice";
 
 const Cart = () => {
-  //
+  // Declaration
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
@@ -71,7 +71,14 @@ const Cart = () => {
               return (
                 <div className="cart-item" key={cartItem.id}>
                   <div className="cart-product">
-                    <img src={cartItem.image} alt={cartItem.name} />
+                    <img
+                      src={
+                        !cartItem.image
+                          ? cartItem.images[0]?.url
+                          : cartItem.image
+                      }
+                      alt={cartItem.name}
+                    />
                     <div>
                       <h3>{cartItem.name}</h3>
 
