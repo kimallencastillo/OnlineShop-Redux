@@ -1,4 +1,4 @@
-import { useEffect, useState  } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getProductDetails } from "../features/productDetailsSlice";
 import { addToCart } from "../features/cartSlice";
@@ -42,7 +42,7 @@ const Details = () => {
   if (item && item.images) {
     console.log("images : ", item.images);
     const image = item.images[0]?.url;
-    
+
     return (
       <div>
         {
