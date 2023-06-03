@@ -4,5 +4,5 @@
 
 [[redirects]]
   from = "/*"
-  to = "/server.js"
+  to = "/products/:splat"
   status = 200
