@@ -4,5 +4,5 @@
 
 [[redirects]]
   from = "/*"
-  to = "/products/:splat"
+  to = "/products/"
   status = 200
