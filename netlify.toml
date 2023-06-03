@@ -4,5 +4,5 @@
 
 [[redirects]]
   from = "/*"
-  to = "http://localhost:5000/products"
+  to = "/server.js"
   status = 200
