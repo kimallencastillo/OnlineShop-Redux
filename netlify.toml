@@ -4,5 +4,5 @@
 
 [[redirects]]
   from = "/*"
-  to = "/backend/server.js"
+  to = "http://localhost:5000/"
   status = 200
