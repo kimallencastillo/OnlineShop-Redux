@@ -1,0 +1,8 @@
+[build]
+  command = "npm run server"
+  publish = "backend" # Or the directory where your Express.js app's static files are located
+
+[[redirects]]
+  from = "/*"
+  to = "/server.js"
+  status = 200
