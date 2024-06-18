@@ -1,8 +1,0 @@
-[build]
-  command: "npm install && npm run dev"
-  publish = "backend"
-
-[[redirects]]
-  from = "/*"
-  to = "/products/"
-  status = 200
