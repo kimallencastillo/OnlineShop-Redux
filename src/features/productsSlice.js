@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 const initialState = {
   items: [],
   status: null,
@@ -8,15 +8,17 @@ const initialState = {
 
 // fetching data using createAsyncThunk
 export const productsFetch = createAsyncThunk(
-  "products/productsFetch",
+  'products/productsFetch',
   async () => {
-    const response = await axios.get("http://localhost:5000/products");
+    const response = await axios.get(
+      'https://onlineshop-redux-backend.onrender.com/products'
+    );
     return response?.data;
   }
 );
 
 const productsSlice = createSlice({
-  name: "products",
+  name: 'products',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -24,14 +26,14 @@ const productsSlice = createSlice({
       .addCase(productsFetch.pending, (state) => {
         // immer
         // updating the state of a mutable state
-        state.status = "pending";
+        state.status = 'pending';
       })
       .addCase(productsFetch.fulfilled, (state, action) => {
-        state.status = "success";
+        state.status = 'success';
         state.items = action.payload;
       })
       .addCase(productsFetch.rejected, (state, action) => {
-        state.status = "rejected";
+        state.status = 'rejected';
         state.error = action.error.message;
       });
   },

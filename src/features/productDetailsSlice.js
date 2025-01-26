@@ -1,12 +1,12 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 // Define the base URL for the API requests
-const API_BASE_URL = "http://localhost:5000";
+const API_BASE_URL = 'https://onlineshop-redux-backend.onrender.com';
 
 // Define async thunk to fetch product details
 export const getProductDetails = createAsyncThunk(
-  "productDetails/getProductDetails",
+  'productDetails/getProductDetails',
   async (productId, thunkAPI) => {
     try {
       const response = await axios.get(
@@ -30,21 +30,21 @@ const initialState = {
 
 // Create product details slice
 const productDetailsSlice = createSlice({
-  name: "productDetails",
+  name: 'productDetails',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getProductDetails.pending, (state) => {
-        state.status = "pending";
+        state.status = 'pending';
       })
       .addCase(getProductDetails.fulfilled, (state, action) => {
-        state.status = "success";
+        state.status = 'success';
         state.item = action.payload;
-        console.log("fulfilled :", state.item);
+        console.log('fulfilled :', state.item);
       })
       .addCase(getProductDetails.rejected, (state, action) => {
-        state.status = "rejected";
+        state.status = 'rejected';
         state.error = action.error.message;
       });
   },
